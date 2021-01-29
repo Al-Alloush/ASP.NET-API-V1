@@ -1,0 +1,4198 @@
+{
+	"info": {
+		"_postman_id": "bd80696f-0eae-44b7-ab42-5f476629f333",
+		"name": "WebApplication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Buggy",
+			"item": [
+				{
+					"name": "Test Authorize, not Auth",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/Buggy/testAuth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Buggy",
+								"testAuth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Al-Alloush as SuperAdmin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('userName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('superadmin_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userNameOrEmail",
+									"value": "Al-Alloush",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!QA1qa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Authorize, Auth Success",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{superadmin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/Buggy/testAuth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Buggy",
+								"testAuth"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Not Found",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/Buggy/notfound",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Buggy",
+								"notfound"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Bad Request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/Buggy/badrequest",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Buggy",
+								"badrequest"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test  Bad Request / ID int",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/Buggy/badrequest/dd",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Buggy",
+								"badrequest",
+								"dd"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Server Error",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/Buggy/serverError",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Buggy",
+								"serverError"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test End Potint not exist",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/Buggy/endpointnotexist",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Buggy",
+								"endpointnotexist"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Login Al-Alloush as SuperAdmin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('userName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('superadmin_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userNameOrEmail",
+									"value": "Al-Alloush",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!QA1qa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login admin_25",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('userName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('admin_25_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userNameOrEmail",
+									"value": "admin_25",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!QA1qa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login admin_29",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('userName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('admin_29_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userNameOrEmail",
+									"value": "admin_29",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!QA1qa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login editor_30",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('userName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('editor_30_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userNameOrEmail",
+									"value": "editor_30",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!QA1qa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login editor_34",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('userName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('editor_34_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userNameOrEmail",
+									"value": "editor_34",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!QA1qa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login visitor_15",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('userName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('visitor_15_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userNameOrEmail",
+									"value": "visitor_15",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!QA1qa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login visitor_16",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('userName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('visitor_16_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userNameOrEmail",
+									"value": "visitor_16",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!QA1qa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login visitor_17",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('userName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"});\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('visitor_17_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userNameOrEmail",
+									"value": "visitor_17",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!QA1qa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Appdev as Visitor Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userName",
+									"value": "Appdev",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "appdev.alalloush@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "birthday",
+									"value": "2000-12-15",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!QA1qa",
+									"type": "text"
+								},
+								{
+									"key": "ConfirmPassword",
+									"value": "!QA1qa",
+									"type": "text"
+								},
+								{
+									"key": "SelectedLanguages",
+									"value": "de",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Appdev",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const user = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Has properties\", function () {\r",
+									"    pm.expect(user).to.have.property('userName');\r",
+									"    pm.expect(user).to.have.property('email');\r",
+									"    pm.expect(user).to.have.property('birthday');\r",
+									"    pm.expect(user).to.have.property('token');\r",
+									"    pm.expect(user).to.have.property('address');\r",
+									"});\r",
+									"\r",
+									"if (pm.test(\"Has properties\")) {\r",
+									"    pm.globals.set('appdev_token', user.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userNameOrEmail",
+									"value": "Appdev",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!QA1qa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request  Forgot Password for Appdev",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "appdev.alalloush@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/account/ForgotPassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"ForgotPassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AccountManager",
+			"item": [
+				{
+					"name": "Get Currend User's  info for Al-Alloush",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{superadmin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/AccountManager/GetCurrentUser",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"GetCurrentUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Currend User's  info for admin_25",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{admin_25_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/AccountManager/GetCurrentUser",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"GetCurrentUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Currend User's Address for Al-Alloush",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{superadmin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/AccountManager/GetCurrentUserAddress",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"GetCurrentUserAddress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update admin_25 Address",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{admin_25_token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Street",
+									"value": "333",
+									"type": "text"
+								},
+								{
+									"key": "BuildingNum",
+									"value": "222",
+									"type": "text"
+								},
+								{
+									"key": "Flore",
+									"value": "111",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "Zipcode",
+									"value": "3245",
+									"type": "text"
+								},
+								{
+									"key": "City",
+									"value": "444",
+									"type": "text"
+								},
+								{
+									"key": "Country",
+									"value": "555",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/AccountManager/UpdateUserAddress",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"UpdateUserAddress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add/Update Al-Alloush Phone Number",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{superadmin_token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phoneNumber",
+									"value": "00491732854722",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/AccountManager/AddPhoneNumber",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"AddPhoneNumber"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Phone Number with Token code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/AccountManager/ConfirmPhoneNumber?userEmail=ahmad@al-alloush.com&phoneNumber=00491732854722&token=305059",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"ConfirmPhoneNumber"
+							],
+							"query": [
+								{
+									"key": "userEmail",
+									"value": "ahmad@al-alloush.com"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "00491732854722"
+								},
+								{
+									"key": "token",
+									"value": "305059"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Phone Number for Al-Alloush",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{superadmin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/AccountManager/DeletePhoneNumber",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"DeletePhoneNumber"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Password for Al-Alloush",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{superadmin_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "OldPassword",
+									"value": "!QA1qa",
+									"type": "text"
+								},
+								{
+									"key": "NewPassword",
+									"value": "!QAY1qay",
+									"type": "text"
+								},
+								{
+									"key": "ConfirmPassword",
+									"value": "!QAY1qay",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/AccountManager/UpdateAccountPassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"UpdateAccountPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Email Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{superadmin_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "newEmail",
+									"value": "appdev.alalloush@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/AccountManager/SendUpdateEmail",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"SendUpdateEmail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Selected Language",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{superadmin_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "LanguageCode",
+									"value": "ar ",
+									"type": "text"
+								},
+								{
+									"key": "Value",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/AccountManager/UpdateSelectedLanguages",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"UpdateSelectedLanguages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload new default Image",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{superadmin_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/ahmad/OneDrive/Bilder/persons images/user (44).jpg"
+								},
+								{
+									"key": "typeId",
+									"value": "1",
+									"description": "1 = imageProfile,  2 = imageCover",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/AccountManager/UploadDefaultUserImage",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"UploadDefaultUserImage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update default Image Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{superadmin_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageId",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "typeId",
+									"value": "1",
+									"description": "1 = imageProfile,  2 = imageCover",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/AccountManager/UpdateDefaultUserImage",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"UpdateDefaultUserImage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user Image",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{superadmin_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageId",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/AccountManager/DeleteUserImage",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"AccountManager",
+								"DeleteUserImage"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts Manager By Admin",
+			"item": [
+				{
+					"name": "Delete Acc not Activated Accounts",
+					"item": [
+						{
+							"name": "Delete Users notConfirmed Acc by SuperAdmin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/DeleteUsersNotConfirmed",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"DeleteUsersNotConfirmed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Users notConfirmed Acc by Admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{admin_25_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/DeleteUsersNotConfirmed",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"DeleteUsersNotConfirmed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Users notConfirmed Acc by Editor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{editor_30_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/DeleteUsersNotConfirmed",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"DeleteUsersNotConfirmed"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Users notConfirmed Acc by Visitor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{visitor_1_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/DeleteUsersNotConfirmed",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"DeleteUsersNotConfirmed"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all Users, and Get user Info",
+					"item": [
+						{
+							"name": "Get all users by SuperAdmin",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{superadmin_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "pageIndex",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "pageSize",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "searchInColumnName",
+											"value": "",
+											"description": "Email / UserName",
+											"type": "text"
+										},
+										{
+											"key": "search",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "Admin",
+											"description": "Admin / Editor / Visitor / SuperAdmin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/GetUsersList",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"GetUsersList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all users by Admin",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{admin_25_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "pageIndex",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "pageSize",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "searchInColumnName",
+											"value": "UserName",
+											"description": "Email / UserName",
+											"type": "text"
+										},
+										{
+											"key": "search",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "Editor",
+											"description": "Admin / Editor / Visitor / SuperAdmin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/GetUsersList",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"GetUsersList"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "change Users Role",
+					"item": [
+						{
+							"name": "change User Role by SuperAdmin",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "UserNameOrEmail",
+											"value": "Appdev",
+											"type": "text"
+										},
+										{
+											"key": "Role",
+											"value": "Editor",
+											"description": "Admin / Editor / Visitor / SuperAdmin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/ChangeUserRole",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"ChangeUserRole"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "change User Role by Admin",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{admin_25_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "UserNameOrEmail",
+											"value": "Appdev",
+											"type": "text"
+										},
+										{
+											"key": "Role",
+											"value": "Editor",
+											"description": "Admin / Editor / Visitor / SuperAdmin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/ChangeUserRole",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"ChangeUserRole"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "change User Role by Editor",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{editor_30_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "UserNameOrEmail",
+											"value": "Appdev",
+											"type": "text"
+										},
+										{
+											"key": "Role",
+											"value": "Visitor",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/ChangeUserRole",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"ChangeUserRole"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete Users",
+					"item": [
+						{
+							"name": "Delete Admin by SuperAdmin",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userNameOrEmail",
+											"value": "admin_27",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/DeleteUser",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"DeleteUser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Admin by Admin",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{admin_25_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userNameOrEmail",
+											"value": "admin_27",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/DeleteUser",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"DeleteUser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Vsitor by Admin",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{admin_25_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userNameOrEmail",
+											"value": "visitor_24",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/DeleteUser",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"DeleteUser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Vsitorby Editor",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{editor_30_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userNameOrEmail",
+											"value": "visitor_24",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/AccountsManagerByAdmin/DeleteUser",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"AccountsManagerByAdmin",
+										"DeleteUser"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Blogs & Categories",
+			"item": [
+				{
+					"name": "Blogs",
+					"item": [
+						{
+							"name": "Test Editor 30 create Blog",
+							"item": [
+								{
+									"name": "Create new Blog by Editor_30",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{editor_30_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "files",
+													"type": "file",
+													"src": [
+														"/C:/Users/ahmad/OneDrive/Bilder/aaaaa.jpg.heic",
+														"/C:/Users/ahmad/OneDrive/Bilder/myImage.PNG",
+														"/C:/Users/ahmad/OneDrive/Bilder/P1110464.JPG"
+													]
+												},
+												{
+													"key": "title",
+													"value": "Editor 30 create a Blog",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "Editor 30 create a Blog",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "Editor 30 create a Blog",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "de",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[7 ,8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/CreateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"CreateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editor 30 Update his Blog",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json",
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman."
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{editor_30_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "id",
+													"value": "1008",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "Editor 30 Update his Blog",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "Editor 30 Update his Blog",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "Editor 30 Update his Blog",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "en",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/UpdateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"UpdateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editor 34 Update Blog Editor 30",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{editor_34_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "id",
+													"value": "1008",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "Editor 34 Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "Editor 34 Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "Editor 34 Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "en",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/UpdateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"UpdateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Admin 25 Update Blog Editor 30",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json",
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman."
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{admin_25_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "id",
+													"value": "1008",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "Admin 25 Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "Admin 25 Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "Admin 25 Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "de",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/UpdateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"UpdateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "SuperAdmin Update Blog Editor 30",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json",
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman."
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{superadmin_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "id",
+													"value": "1008",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "SuperAdmin Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "SuperAdmin Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "SuperAdmin Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "en",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/UpdateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"UpdateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editor 30 Delete his Blog Image",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{editor_30_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "imageId",
+													"value": "1998",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/DeleteBlogImage",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"DeleteBlogImage"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editor 34 Delete Blog Image Editor 30 Copy",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{editor_34_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "imageId",
+													"value": "2000",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/DeleteBlogImage",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"DeleteBlogImage"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Admin 25  Delete Blog Image Editor 30",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{admin_25_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "imageId",
+													"value": "2000",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/DeleteBlogImage",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"DeleteBlogImage"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "SuperAdmin  Delete Blog Image Editor 30",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{superadmin_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "imageId",
+													"value": "1999",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/DeleteBlogImage",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"DeleteBlogImage"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editor 30 add new blog images",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{editor_30_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "files",
+													"type": "file",
+													"src": "/C:/Users/ahmad/OneDrive/Bilder/persons images/user (33).jpg"
+												},
+												{
+													"key": "blogId",
+													"value": "1008",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/AddNewBlogImages",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"AddNewBlogImages"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editor 34 add new blog images Editor 30",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{editor_34_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "files",
+													"type": "file",
+													"src": "/C:/Users/ahmad/OneDrive/Bilder/persons images/user (33).jpg"
+												},
+												{
+													"key": "blogId",
+													"value": "1008",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/AddNewBlogImages",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"AddNewBlogImages"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Test Admin 25  create Blog",
+							"item": [
+								{
+									"name": "Create new Blog by Admin_25",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{admin_25_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "files",
+													"type": "file",
+													"src": [
+														"/C:/Users/ahmad/OneDrive/Bilder/aaaaa.jpg.heic",
+														"/C:/Users/ahmad/OneDrive/Bilder/myImage.PNG",
+														"/C:/Users/ahmad/OneDrive/Bilder/P1110464.JPG"
+													]
+												},
+												{
+													"key": "title",
+													"value": "Admin 25 create a Blog",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "Admin 25 create a Blog",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "Admin 25 create a Blog",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "de",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[7]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/CreateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"CreateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Admin 25  Update his Blog",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{admin_25_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "id",
+													"value": "1009",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "Admin 25  Update his Blog",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "Admin 25  Update his Blog",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "Admin 25  Update his Blog",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "en",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/UpdateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"UpdateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editor 34 Update Blog Admin 25",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json",
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman."
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{editor_34_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "id",
+													"value": "1009",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "Editor 34 Update Blog Admin 25",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "Editor 34 Update Blog Admin 25",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "Editor 34 Update Blog Admin 25",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "en",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/UpdateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"UpdateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Admin 29 Update Blog Admin 25",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json",
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman."
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{admin_29_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "id",
+													"value": "1009",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "Admin 29 Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "Admin 29 Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "Admin 29 Update Blog Editor 30",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "de",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/UpdateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"UpdateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "SuperAdmin Update Blog Admin 25",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json",
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman."
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{superadmin_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "id",
+													"value": "1009",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "SuperAdmin Update Blog Admin 25",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "SuperAdmin Update Blog Admin 25",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "SuperAdmin Update Blog Admin 25",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "en",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/UpdateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"UpdateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Admin 25 Delete his Blog Image",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{admin_25_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "imageId",
+													"value": "2001",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/DeleteBlogImage",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"DeleteBlogImage"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Admin 29 Delete his Blog Admin 25",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{admin_29_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "imageId",
+													"value": "2001",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/DeleteBlogImage",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"DeleteBlogImage"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editor 30  Delete his Blog Admin 25",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{editor_30_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "imageId",
+													"value": "2001",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/DeleteBlogImage",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"DeleteBlogImage"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "SuperAdmin Delete his Blog Admin 25",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{superadmin_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "imageId",
+													"value": "2002",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/DeleteBlogImage",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"DeleteBlogImage"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Test SuperAdmin  create Blog",
+							"item": [
+								{
+									"name": "Create new Blog by SuperAdmin",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{superadmin_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "files",
+													"type": "file",
+													"src": [
+														"/C:/Users/ahmad/OneDrive/Bilder/aaaaa.jpg.heic",
+														"/C:/Users/ahmad/OneDrive/Bilder/myImage.PNG",
+														"/C:/Users/ahmad/OneDrive/Bilder/P1110464.JPG"
+													]
+												},
+												{
+													"key": "title",
+													"value": "SuperAdmin create a Blog",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "SuperAdmin create a Blog",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "SuperAdmin create a Blog",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "de",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[7]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/CreateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"CreateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "SuperAdmin  Update his Blog",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{superadmin_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "id",
+													"value": "1010",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "SuperAdmin  Update his Blog",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "SuperAdmin  Update his Blog",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "SuperAdmin  Update his Blog",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "en",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/UpdateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"UpdateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Editor 34 Update Blog SuperAdmin",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json",
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman."
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{editor_34_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "id",
+													"value": "1010",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "Editor 34 Update Blog SuperAdmin",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "Editor 34 Update Blog SuperAdmin",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "Editor 34 Update Blog SuperAdmin",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "en",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/UpdateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"UpdateBlog"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Admin 29 Update Blog SuperAdmin",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json",
+												"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman."
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{admin_29_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "id",
+													"value": "1010",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "Admin 29 Update Blog SuperAdmin",
+													"type": "text"
+												},
+												{
+													"key": "shortTitle",
+													"value": "Admin 29 Update Blog SuperAdmin",
+													"type": "text"
+												},
+												{
+													"key": "body",
+													"value": "Admin 29 Update Blog SuperAdmin",
+													"type": "text"
+												},
+												{
+													"key": "publish",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "commentable",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "atTop",
+													"value": "true",
+													"type": "text"
+												},
+												{
+													"key": "releaseDate",
+													"value": "2000-12-15",
+													"type": "text"
+												},
+												{
+													"key": "languageId",
+													"value": "de",
+													"type": "text"
+												},
+												{
+													"key": "categories",
+													"value": "[8]",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/api/Blog/UpdateBlog",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"Blog",
+												"UpdateBlog"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Get All Card Blogs",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "PageIndex",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "PageSize",
+											"value": "50",
+											"type": "text"
+										},
+										{
+											"key": "categoryId",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"description": "titleAsc/ titleDesc / dateAsc / Default: dateDesc",
+											"type": "text"
+										},
+										{
+											"key": "search",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/blog/GetAllBlogCardList",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"blog",
+										"GetAllBlogCardList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get blog Dietails",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "1001",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/blog/GetBlogDetails",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"blog",
+										"GetBlogDetails"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new Blog Images",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json",
+										"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman."
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "files",
+											"type": "file",
+											"src": "/C:/Users/ahmad/OneDrive/Bilder/persons images/user (33).jpg"
+										},
+										{
+											"key": "blogId",
+											"value": "1001",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/Blog/AddNewBlogImages",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"Blog",
+										"AddNewBlogImages"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "Get all SourceBlogCategories",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/api/BlogCategory/GetAllSourceBlogCategoryName",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"BlogCategory",
+										"GetAllSourceBlogCategoryName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get SourceBlogCategory by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/BlogCategory/GetSourceBlogCategoryName",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"BlogCategory",
+										"GetSourceBlogCategoryName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Source Blog's Category Name",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "Name",
+											"value": "Music",
+											"type": "text"
+										},
+										{
+											"key": "Id",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/BlogCategory/PutSourceCategoryName",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"BlogCategory",
+										"PutSourceCategoryName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteSource Blog's Category Name by  Id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "7",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/BlogCategory/DeleteSourceCategoryName",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"BlogCategory",
+										"DeleteSourceCategoryName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All  blog's category Names By Lang",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "lang",
+											"value": "ar",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/BlogCategory/GetAllCategoryNamesByLang",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"BlogCategory",
+										"GetAllCategoryNamesByLang"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get  blog's category Names By Lang&Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "lang",
+											"value": "ar",
+											"type": "text"
+										},
+										{
+											"key": "id",
+											"value": "3",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/BlogCategory/GetCategoryNames",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"BlogCategory",
+										"GetCategoryNames"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update/Add new BlogCategory",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{superadmin_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "Name",
+											"value": "Spiele",
+											"type": "text"
+										},
+										{
+											"key": "SourceCategoryId",
+											"value": "8",
+											"type": "text"
+										},
+										{
+											"key": "LanguageId",
+											"value": "en",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/BlogCategory/PutBlogCategory",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"BlogCategory",
+										"PutBlogCategory"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:5000"
+		}
+	]
+}
