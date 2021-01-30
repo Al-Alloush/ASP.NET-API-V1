@@ -62,9 +62,7 @@ namespace API
                         to inject SignInManager service need to inject another service : 
                         - services.AddAuthentication() 
                 to use Microsoft.AspNetCore.Identity Token provider to use function like:UserManager.GenerateEmailConfirmationTokenAsync()
-                    - .AddDefaultTokenProviders()
-                
-           */
+                    - .AddDefaultTokenProviders() */
             services.AddIdentityCore<AppUser>()
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<AppDbContext>()

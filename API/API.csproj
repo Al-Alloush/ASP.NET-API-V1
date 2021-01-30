@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Classes Diagam\" />
     <Folder Include="wwwroot\Uploads\Images\" />
     <Folder Include="wwwroot\Uploads\Files\" />
     <Folder Include="wwwroot\Uploads\Viedos\" />

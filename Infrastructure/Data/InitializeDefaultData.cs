@@ -86,7 +86,7 @@ namespace Infrastructure.Data
                     SelectedLanguages = "ar,en,",
                     RegisterDate = DateTime.Now,
                     Birthday = DateTime.Parse("15/6/1978", MyCultureInfo),
-                    PhoneNumber = "1734522",
+                    PhoneNumber = "1732854722",
                     PhoneNumberConfirmed = true,
                     AutomatedPassword = false,
                     Address = new Address
@@ -94,8 +94,8 @@ namespace Infrastructure.Data
                         Street = "Bahn",
                         BuildingNum = "12",
                         Flore = "L 3",
-                        City = "Diennsried",
-                        Zipcode = "874563",
+                        City = "Dietmannsried",
+                        Zipcode = "87463",
                         Country = "German"
                     }
                 };
@@ -208,20 +208,11 @@ namespace Infrastructure.Data
             await context.SaveChangesAsync();
 
 
-            string[] BlogCategoryNamesEn = { "Food", "Travel", "Music", "Lifestyle", "Fitness", "Sports" };
             string[] BlogCategoryNamesDe = { "Essen", "Reise", "Musik", "Lebensstil", "Fitness", "Sport" };
             string[] BlogCategoryNamesAr = { "طعام", "السفر", "موسيقى", "أسلوب الحياة", "اللياقه البدنيه", "رياضة" };
 
             for (int i = 0; i < BlogCategoryNames.Length; i++)
             {
-                // En
-                var lEn = new BlogCategory
-                {
-                    Name = BlogCategoryNamesEn[i],
-                    SourceCategoryId = BlogCategoryNamesId[i],
-                    LanguageId = LanguageCodeId[2]
-                };
-
                 // De
                 var lDe = new BlogCategory
                 {
